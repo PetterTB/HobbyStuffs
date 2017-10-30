@@ -16,7 +16,7 @@ class CharWalker:
     def walk(self):
 
         if not self.current_dirs:
-            self.current_dirs = self.dirs
+            self.current_dirs = list(self.dirs)
 
         return self.current_dirs.pop()
 
