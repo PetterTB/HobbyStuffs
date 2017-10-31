@@ -1,6 +1,7 @@
 import pyautogui
 import os
 import time
+import random
 
 
 class CharWalker:
@@ -8,10 +9,10 @@ class CharWalker:
 
     def __init__(self):
 
-        self.dirs = ['up']*30
-        self.dirs.extend(['down']*30)
+        self.dirs = ['left']*30
+        self.dirs.extend(['right']*30)
 
-        self.current_dirs = self.dirs
+        self.current_dirs = list(self.dirs)
 
     def walk(self):
 
@@ -22,10 +23,9 @@ class CharWalker:
 
 def FirstRook():
 
-    walker = CharWalker()
-
     while(True):
 
-        time.sleep(1)
+        time.sleep(2 + random.random())
         pyautogui.press('space')
-        pyautogui.press(walker.walk())
+        time.sleep(1 + random.random())
+        pyautogui.press('1')
