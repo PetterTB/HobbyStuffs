@@ -2,6 +2,7 @@ import os
 from PIL import ImageGrab
 from ScreenPositions import pos_around_char, pos_gp_bp
 from ScreenGrab import ScreenGrab
+import time
 
 class Looter:
 
@@ -14,6 +15,7 @@ class Looter:
     def loot_all_squares_around_char(self):
 
         self.click_all_neighbor_squares()
+        time.sleep(2)
         self.loot()
 
     def click_all_neighbor_squares(self):

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7b2a196f-db74-4cd8-bcea-4cccb76d357b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Looter.py" afterPath="$PROJECT_DIR$/Looter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Trolls.py" afterPath="$PROJECT_DIR$/Trolls.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,11 +28,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Trolls.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Trolls.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Trolls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+                <state relative-caret-position="238">
+                  <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
                   <folding>
                     <element signature="e#0#16#0" expanded="true" />
                   </folding>
@@ -51,14 +52,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Looter.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Looter.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Looter.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="34">
+                  <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -144,9 +143,9 @@
         <option value="$PROJECT_DIR$/ScreenPositions.py" />
         <option value="$PROJECT_DIR$/Archive_input/ScreenGrab.py" />
         <option value="$PROJECT_DIR$/ScreenGrab.py" />
-        <option value="$PROJECT_DIR$/Trolls.py" />
         <option value="$PROJECT_DIR$/Mouse.py" />
         <option value="$PROJECT_DIR$/Looter.py" />
+        <option value="$PROJECT_DIR$/Trolls.py" />
       </list>
     </option>
   </component>
@@ -483,9 +482,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -589,16 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Trolls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Mouse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -621,10 +608,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Looter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state relative-caret-position="34">
+          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Trolls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
