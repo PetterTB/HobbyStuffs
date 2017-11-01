@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b2a196f-db74-4cd8-bcea-4cccb76d357b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Looter.py" afterPath="$PROJECT_DIR$/Looter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mouse.py" afterPath="$PROJECT_DIR$/Mouse.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +56,8 @@
           <file leaf-file-name="Looter.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Looter.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+                <state relative-caret-position="323">
+                  <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -66,15 +68,10 @@
           <file leaf-file-name="Mouse.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Mouse.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="33" column="44" lean-forward="false" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+                <state relative-caret-position="527">
+                  <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
-                    <marker date="1509570870662" expanded="true" signature="372:755" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="442:471" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="792:1013" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="814:827" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="855:1013" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -105,14 +102,14 @@
             <entry file="file://$PROJECT_DIR$/Mouse.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="-17">
-                  <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+                  <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
-                    <marker date="1509570870662" expanded="true" signature="372:755" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="442:471" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="792:1013" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="814:827" ph="..." />
-                    <marker date="1509570870662" expanded="true" signature="855:1013" ph="..." />
+                    <marker date="1509571446674" expanded="true" signature="384:791" ph="..." />
+                    <marker date="1509571446674" expanded="true" signature="454:483" ph="..." />
+                    <marker date="1509571446674" expanded="true" signature="828:1049" ph="..." />
+                    <marker date="1509571446674" expanded="true" signature="850:863" ph="..." />
+                    <marker date="1509571446674" expanded="true" signature="891:1049" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -151,10 +148,10 @@
         <option value="$PROJECT_DIR$/FirstRook.py" />
         <option value="$PROJECT_DIR$/Archive_input/Looter.py" />
         <option value="$PROJECT_DIR$/Clicker.py" />
-        <option value="$PROJECT_DIR$/Mouse.py" />
         <option value="$PROJECT_DIR$/ScreenPositions.py" />
         <option value="$PROJECT_DIR$/Archive_input/ScreenGrab.py" />
         <option value="$PROJECT_DIR$/Trolls.py" />
+        <option value="$PROJECT_DIR$/Mouse.py" />
         <option value="$PROJECT_DIR$/Looter.py" />
       </list>
     </option>
@@ -484,11 +481,6 @@
           <caret line="33" column="39" lean-forward="false" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1509570870662" expanded="true" signature="372:755" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="442:471" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="792:1013" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="814:827" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="855:1013" ph="..." />
           </folding>
         </state>
       </provider>
@@ -603,21 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mouse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="33" column="44" lean-forward="false" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <marker date="1509570870662" expanded="true" signature="372:755" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="442:471" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="792:1013" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="814:827" ph="..." />
-            <marker date="1509570870662" expanded="true" signature="855:1013" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FirstRook.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -638,10 +615,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Mouse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Looter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        <state relative-caret-position="323">
+          <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
