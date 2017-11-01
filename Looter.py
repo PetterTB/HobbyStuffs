@@ -31,5 +31,5 @@ class Looter:
             self.m.drag(gp[0], gp[1], pos_gp_bp[0], pos_gp_bp[1])
 
         for meat in s.simple_find_meat():
-            self.m.left_click(meat[0],meat[1])
+            self.m.right_click(meat[0],meat[1])
 
