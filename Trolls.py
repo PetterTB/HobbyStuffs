@@ -3,9 +3,10 @@ import os
 import time
 import random
 from Looter import Looter
+from Mouse import Mouse
 
-
-l = Looter()
+m = Mouse()
+l = Looter(m)
 
 while(True):
 
