@@ -25,14 +25,17 @@ class Mouse:
 
     def left_click(self, x,y):
         pyautogui.moveTo(x,y, 0.1)
+        time.sleep(0.1)
         pyautogui.click()
 
     def right_click(self, x,y):
         pyautogui.moveTo(x,y, 0.1)
+        time.sleep(0.1)
         pyautogui.click(button='right')
 
     def drag(self,from_x, from_y, to_x,to_y):
         pyautogui.moveTo(from_x, from_y, 0.1)
+        time.sleep(0.1)
         pyautogui.dragTo(to_x,to_y, button='left')
 
 class TestMouse(unittest.TestCase):
