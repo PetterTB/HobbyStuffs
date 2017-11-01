@@ -35,7 +35,8 @@ class ScreenGrab:
         while(y<y_max):
             for x in range(x_max):
                 if self.im.getpixel((x,y)) == (239,140,17):
-                    res.append((x,y))
+                    spam = ((self.b_box[0]+x), self.b_box[1]+y)
+                    res.append(spam)
                     y += 30
             y += 1
         return res
@@ -50,7 +51,8 @@ class ScreenGrab:
         while(y<y_max):
             for x in range(x_max):
                 if self.im.getpixel((x,y)) == (231,147,77):
-                    res.append((x,y))
+                    spam = ((self.b_box[0]+x), self.b_box[1]+y)
+                    res.append(spam)
                     y += 30
             y += 1
         return res

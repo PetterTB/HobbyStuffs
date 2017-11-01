@@ -20,7 +20,6 @@ class Looter:
 
         for p1,p2 in self.p:
             self.m.right_click(p1,p2)
-            self.m.left_click(p1+20,p2+45)
 
     def loot(self):
 
