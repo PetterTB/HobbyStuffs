@@ -19,8 +19,8 @@ class Looter:
     def click_all_neighbor_squares(self):
 
         for p1,p2 in self.p:
-            mouse.right_click(p1,p2)
-            mouse.left_click(p1+20,p2+50)
+            self.m.right_click(p1,p2)
+            self.m.left_click(p1+20,p2+50)
 
     def loot(self):
 
@@ -32,5 +32,5 @@ class Looter:
             self.m.drag(gp[0], gp[1], pos_gp_bp[0], pos_gp_bp[1])
 
         for meat in s.simple_find_meat():
-            self.mouse.left_click(meat[0],meat[1])
+            self.m.left_click(meat[0],meat[1])
 
