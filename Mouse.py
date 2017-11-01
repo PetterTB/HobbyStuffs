@@ -29,7 +29,6 @@ class Mouse:
 
     def right_click(self, x,y):
         pyautogui.moveTo(x,y, 0.1)
-        time.sleep(0.5)
         pyautogui.click(button='right')
 
     def drag(self,from_x, from_y, to_x,to_y):
