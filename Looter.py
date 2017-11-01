@@ -14,7 +14,7 @@ class Looter:
     def loot_all_squares_around_char(self):
 
         self.click_all_neighbor_squares()
-        self.drag_loot()
+        self.loot()
 
     def click_all_neighbor_squares(self):
 

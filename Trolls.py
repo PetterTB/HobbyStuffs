@@ -13,4 +13,4 @@ while(True):
     time.sleep(1 + random.random())
     pyautogui.press('space')
     time.sleep(3 + random.random())
-    l.loot()
+    l.loot_all_squares_around_char()
