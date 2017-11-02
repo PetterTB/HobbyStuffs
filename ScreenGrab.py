@@ -71,7 +71,9 @@ class ScreenGrab:
 
     def simple_find_gold(self):
 
-        return self.find_loot_window_matches((239,140,17))
+        gold = self.find_loot_window_matches((239,140,17))
+        honeycomb = self.find_loot_window_matches((93,61,12))
+        return gold or honeycomb
 
     def simple_find_meat(self):
 
