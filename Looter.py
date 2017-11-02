@@ -32,7 +32,7 @@ class Looter:
 
         for gp in s.simple_find_gold():
             self.m.drag(gp[0], gp[1], pos_gp_bp[0], pos_gp_bp[1])
-
+            time.sleep(0.5)
         s.grab_screen()
 
         for meat in s.simple_find_meat():
