@@ -1,2 +1,4 @@
 Archive_input/*
 .idea/*
+.idea/workspace.xml
+__pycache__/*

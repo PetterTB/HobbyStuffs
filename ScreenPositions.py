@@ -21,3 +21,6 @@ pos_bb_loot_ul = (1014,360)
 pos_bb_loot_lr = (1187,718)
 
 pos_gp_bp = (1216,465)
+
+pos_map_ul = (1197,26)
+pos_map_lr = (1303,133)
