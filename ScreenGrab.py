@@ -44,8 +44,8 @@ class ScreenGrab:
     def find_similar_map_point(self,last_point):
 
         if last_point is not None:
-            for i in range(20):
-                for j in range(20):
+            for i in range(15):
+                for j in range(15):
                     x = last_point[0] + j
                     y = last_point[0] + i
                     if x<self.get_max_x() and y<self.get_max_y():

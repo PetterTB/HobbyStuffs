@@ -27,15 +27,15 @@ class Looter:
 
         s = ScreenGrab()
         s.set_loot_bb()
+
         s.grab_screen()
 
         for gp in s.simple_find_gold():
             self.m.drag(gp[0], gp[1], pos_gp_bp[0], pos_gp_bp[1])
 
-        s = ScreenGrab()
-        s.set_loot_bb()
         s.grab_screen()
 
         for meat in s.simple_find_meat():
+            time.sleep(0.1)
             self.m.right_click(meat[0],meat[1])
 

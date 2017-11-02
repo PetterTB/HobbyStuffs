@@ -20,17 +20,19 @@ coords = None
 
 while(True):
 
+    s = ScreenGrab()
+    s.set_map_bb()
     time.sleep(1 + random.random())
     pyautogui.press('space')
     time.sleep(6 + random.random())
     if i%3 == 0:
         pyautogui.press('2')
+
     if not check_creatures_present():
         l.loot_all_squares_around_char()
-
+        s.grab_screen()
+        coords = s.find_random_map_point()
     while not check_creatures_present():
-        s = ScreenGrab()
-        s.set_map_bb()
         s.grab_screen()
         if(random.randint(0,10) == 10):
             coords=s.find_random_map_point()
