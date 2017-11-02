@@ -35,6 +35,7 @@ while(True):
         m.left_click(coords[0], coords[1])
         for i in range(10):
             if check_creatures_present():
+                pyautogui.press('space')
                 break
             time.sleep(1)
     i += 1

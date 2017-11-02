@@ -33,11 +33,13 @@ class ScreenGrab:
 
     def find_random_map_point(self):
 
-        for i in range(100):
+        for i in range(1000):
 
             coords = self.get_random_coords()
             if self.is_walkable(coords):
                 return self.make_absolute_coords(coords)
+
+        return pos_bb_loot_ul
 
     def is_walkable(self, c):
 
