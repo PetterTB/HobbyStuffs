@@ -15,7 +15,7 @@ while(True):
     s.set_map_bb()
     s.grab_screen()
     coords = s.find_random_map_point()
-    m.left_click(coords)
+    m.left_click(coords[0], coords[1])
 
     for i in range(3):
         time.sleep(1 + random.random())

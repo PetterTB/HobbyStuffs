@@ -28,9 +28,6 @@ class Mouse:
         time.sleep(0.1)
         pyautogui.click()
 
-    def left_click(self, pos):
-        self.left_click(pos[0],pos[1])
-
     def right_click(self, x,y):
         pyautogui.moveTo(x,y, 0.1)
         time.sleep(0.1)
