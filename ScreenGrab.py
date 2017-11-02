@@ -46,9 +46,12 @@ class ScreenGrab:
         if last_point is not None:
             for i in range(20):
                 for j in range(20):
-                    p = (last_point[0] + i, last_point[1] + j)
-                    if self.is_walkable(p):
-                        return self.make_absolute_coords(p)
+                    x = last_point[0] + j
+                    y = last_point[0] + i
+                    if x<self.get_max_x() and y<self.get_max_y():
+                        p = (last_point[0] + i, last_point[1] + j)
+                        if self.is_walkable(p):
+                            return self.make_absolute_coords(p)
         return self.find_random_map_point()
 
 
@@ -101,7 +104,6 @@ class ScreenGrab:
     def is_creature_present(self):
 
         p = self.im.getpixel(pos_first_monster)
-        print(p)
         for color in p:
             if 50 <= color <= 90:
                 return False
