@@ -24,3 +24,5 @@ pos_gp_bp = (1216,465)
 
 pos_map_ul = (1197,26)
 pos_map_lr = (1303,133)
+
+pos_first_monster = (1042,82)

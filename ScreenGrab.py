@@ -5,6 +5,7 @@ from PIL import Image
 import unittest
 from ScreenPositions import pos_bb_loot_ul, pos_bb_loot_lr
 from ScreenPositions import pos_map_lr, pos_map_ul
+from ScreenPositions import pos_first_monster
 from random import randint
 
 class ScreenGrab:
@@ -83,6 +84,14 @@ class ScreenGrab:
     def get_max_y(self):
         return self.b_box[3] - self.b_box[1]
 
+    def is_creature_present(self):
+
+        p = self.im.getpixel(pos_first_monster)
+        print(p)
+        for color in p:
+            if 50 <= color <= 90:
+                return False
+        return True
 
 class TestScreenGrabber(unittest.TestCase):
 
@@ -94,20 +103,19 @@ class TestScreenGrabber(unittest.TestCase):
         s = ScreenGrab()
         s.b_box = pos_bb_loot_ul + pos_bb_loot_lr
         s.load_file_image(r'C:\dev\HobbyStuffs\Archive_input\test_img_trolls.png')
-        s.im.show()
-        print(s.im.getpixel((10,10)))
-        print(s.simple_find_gold())
-        print(s.simple_find_meat())
-        a = input()
 
     def test_simple_map(self):
         s = ScreenGrab()
         s.set_map_bb()
         s.load_file_image(r'C:\dev\HobbyStuffs\Archive_input\test_img_map.png')
         s.im.show()
-        b=input()
-        for i in range(5):
-            print(s.find_random_map_point())
+
+    def test_is_creature_present(self):
+
+        s = ScreenGrab()
+        s.b_box = (0,0) + (1176,91)
+        s.load_file_image(r'C:\dev\HobbyStuffs\Archive_input\full_snap__1509561751.png')
+        print("Creature present?", s.is_creature_present())
 
 if __name__ == '__main__':
     unittest.main()
