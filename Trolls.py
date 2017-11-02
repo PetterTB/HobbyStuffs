@@ -9,6 +9,12 @@ from ScreenGrab import ScreenGrab
 m = Mouse()
 l = Looter(m)
 
+def check_creatures_present():
+    s2 = ScreenGrab()
+    s2.b_box = (0,0) + (1176,91)
+    s2.grab_screen()
+    return s2.is_creature_present()
+
 while(True):
 
     i = 0;
@@ -17,11 +23,10 @@ while(True):
     time.sleep(6 + random.random())
     if i%3 == 0:
         pyautogui.press('2')
-    s2 = ScreenGrab()
-    s2.b_box = (0,0) + (1176,91)
-    s2.grab_screen()
-    if not s2.is_creature_present():
+    if not check_creatures_present():
         l.loot_all_squares_around_char()
+
+    while not check_creatures_present():
         s = ScreenGrab()
         s.set_map_bb()
         s.grab_screen()
