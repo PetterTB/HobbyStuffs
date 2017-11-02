@@ -41,6 +41,18 @@ class ScreenGrab:
 
         return pos_bb_loot_ul
 
+    def find_similar_map_point(self,last_point):
+
+        if last_point is not None:
+            for i in range(20):
+                for j in range(20):
+                    p = (last_point[0] + i, last_point[1] + j)
+                    if self.is_walkable(p):
+                        return self.make_absolute_coords(p)
+        return self.find_random_map_point()
+
+
+
     def is_walkable(self, c):
 
         pixel = self.im.getpixel(c)

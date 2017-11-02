@@ -16,6 +16,7 @@ def check_creatures_present():
     return s2.is_creature_present()
 
 i = 1
+coords = None
 
 while(True):
 
@@ -31,7 +32,10 @@ while(True):
         s = ScreenGrab()
         s.set_map_bb()
         s.grab_screen()
-        coords = s.find_random_map_point()
+        if(random.randint(0,10) == 10):
+            coords=s.find_random_map_point()
+        else:
+            coords = s.find_similar_map_point(coords)
         m.left_click(coords[0], coords[1])
         for i in range(10):
             if check_creatures_present():
