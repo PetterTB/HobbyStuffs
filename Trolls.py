@@ -24,7 +24,7 @@ while(True):
     s.set_map_bb()
     time.sleep(1 + random.random())
     pyautogui.press('space')
-    time.sleep(3 + random.random())
+    time.sleep(9 + random.random())
     if i%3 == 0:
         pyautogui.press('1')
     pyautogui.press('2')
