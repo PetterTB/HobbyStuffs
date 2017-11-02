@@ -21,5 +21,6 @@ while(True):
         time.sleep(1 + random.random())
         pyautogui.press('space')
         time.sleep(6 + random.random())
-        pyautogui.press('2')
+        if i%2 == 0:
+            pyautogui.press('2')
         l.loot_all_squares_around_char()
