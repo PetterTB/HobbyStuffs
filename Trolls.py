@@ -24,7 +24,7 @@ while(True):
     s.set_map_bb()
     time.sleep(1 + random.random())
     pyautogui.press('space')
-    time.sleep(9 + random.random())
+    time.sleep(3 + random.random())
     if i%3 == 0:
         pyautogui.press('1')
     pyautogui.press('2')
@@ -44,5 +44,5 @@ while(True):
             if check_creatures_present():
                 pyautogui.press('space')
                 break
-            time.sleep(1)
+            time.sleep(2)
     i += 1
