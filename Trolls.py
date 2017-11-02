@@ -19,6 +19,7 @@ while(True):
         pyautogui.press('2')
     s2 = ScreenGrab()
     s2.b_box = (0,0) + (1176,91)
+    s2.grab_screen()
     if not s2.is_creature_present():
         l.loot_all_squares_around_char()
         s = ScreenGrab()
