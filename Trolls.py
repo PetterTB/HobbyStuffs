@@ -27,6 +27,7 @@ while(True):
     time.sleep(6 + random.random())
     if i%3 == 0:
         pyautogui.press('2')
+        pyautogui.press('1')
 
     if not check_creatures_present():
         l.loot_all_squares_around_char()
