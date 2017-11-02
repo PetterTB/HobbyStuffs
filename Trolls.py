@@ -32,4 +32,5 @@ while(True):
         s.grab_screen()
         coords = s.find_random_map_point()
         m.left_click(coords[0], coords[1])
+        time.sleep(10)
     i += 1
