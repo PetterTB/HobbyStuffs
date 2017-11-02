@@ -11,11 +11,11 @@ l = Looter(m)
 
 while(True):
 
-
+    i = 0;
     time.sleep(1 + random.random())
     pyautogui.press('space')
     time.sleep(6 + random.random())
-    if i%2 == 0:
+    if i%3 == 0:
         pyautogui.press('2')
     s2 = ScreenGrab()
     s2.b_box = (0,0) + (1176,91)
@@ -26,3 +26,4 @@ while(True):
         s.grab_screen()
         coords = s.find_random_map_point()
         m.left_click(coords[0], coords[1])
+    i += 1
