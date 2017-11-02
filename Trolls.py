@@ -15,9 +15,10 @@ def check_creatures_present():
     s2.grab_screen()
     return s2.is_creature_present()
 
+i = 1
+
 while(True):
 
-    i = 0;
     time.sleep(1 + random.random())
     pyautogui.press('space')
     time.sleep(6 + random.random())
@@ -32,5 +33,8 @@ while(True):
         s.grab_screen()
         coords = s.find_random_map_point()
         m.left_click(coords[0], coords[1])
-        time.sleep(10)
+        for i in range(10):
+            if check_creatures_present():
+                break
+            time.sleep(1)
     i += 1
