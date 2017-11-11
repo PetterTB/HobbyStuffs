@@ -38,19 +38,11 @@ class ScreenGrabStub:
         return (100,100)
 
     def find_similar_map_point(self,last_point):
-        print("Found random map point!")
-        return (75,75)
+        print("Found similar map point!")
+        return (last_point[0]+1, last_point[1] +1)
 
     def is_creature_present(self):
         return randint(0,1)
-
-
-    def is_walkable(self, c):
-
-        pixel = self.im.getpixel(c)
-        if pixel in self.walkable_pixels:
-            return True
-        return False
 
     def get_random_coords(self):
 
@@ -58,47 +50,15 @@ class ScreenGrabStub:
         y = randint(0, self.get_max_y()-1)
         return(x,y)
 
-    def simple_find_gold(self):
+    def get_pixel_from_img(self, pos):
 
-        gold = self.find_loot_window_matches((239,140,17))
-        honeycomb = self.find_loot_window_matches((93,61,12))
-        return gold or honeycomb
-
-    def simple_find_meat(self):
-
-        return self.find_loot_window_matches((231,147,77))
-
-    def find_loot_window_matches(self, pixel_values):
-
-        x_max = self.get_max_x()
-        y_max = self.get_max_y()
-        res = []
-
-        y = 0
-        while(y< y_max):
-            for x in range(x_max):
-                if self.im.getpixel((x,y)) == pixel_values:
-                    res.append(self.make_absolute_coords((x, y)))
-                    y += 30
-            y += 1
-        return res
-
-    def make_absolute_coords(self, coords):
-        return (self.b_box[0] + coords[0]), self.b_box[1] + coords[1]
+        return (0,0,0)
 
     def get_max_x(self):
         return self.b_box[2] - self.b_box[0]
 
     def get_max_y(self):
         return self.b_box[3] - self.b_box[1]
-
-    def is_creature_present(self):
-
-        p = self.im.getpixel(pos_first_monster)
-        for color in p:
-            if 50 <= color <= 90:
-                return False
-        return True
 
 
 class ScreenGrab:
@@ -202,6 +162,10 @@ class ScreenGrab:
             if 50 <= color <= 90:
                 return False
         return True
+
+    def get_pixel_from_img(self, pos):
+
+        return self.im.getpixel(pos)
 
 class TestScreenGrabber(unittest.TestCase):
 

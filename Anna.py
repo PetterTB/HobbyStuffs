@@ -2,7 +2,7 @@ from PIL import ImageGrab
 import os
 import time
 from CaveHunter import CaveHunter
-from Mouse import Mouse
+from GameInput import GameInput
 import argparse
 
 
@@ -13,18 +13,24 @@ def screenGrab():
     im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) +
             '.png', 'PNG')
 
-
 def parse_args():
     pass
 
 def main():
     while(True):
         try:
-            c = CaveHunter(Mouse())
-            c.hunt_floor(1000)
+            c = CaveHunter(GameInput())
+            c.hunt_floor(100)
+            c.go_down()
+            c.hunt_floor(100)
+            c.go_down()
+            c.hunt_floor(100)
+            c.go_up_with_rope()
+            c.hunt_floor(50)
+            c.go_up_with_rope()
         except:
             print("Oi, Exception!")
 
-    
+
 if __name__ == '__main__':
     main()
