@@ -39,9 +39,9 @@ class CaveHunter:
                 pyautogui.press('space')
                 #Kill creature sleep.
                 time.sleep(2 + random.random())
-
-                if c % 3 == 0:
+                if c % 15 == 0:
                     pyautogui.press('1')
+                if c % 3 == 0:
                     time.sleep(0.3)
                     pyautogui.press('2')
             else:
