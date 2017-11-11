@@ -4,6 +4,7 @@ import random
 import unittest
 import time
 
+
 class MouseMock:
 
     def __init__(self):
@@ -11,6 +12,9 @@ class MouseMock:
 
     def left_click(self, x,y):
         print("mouse.left_click",x,y)
+
+    def left_click_pos(self, pos):
+        print("mouse.left_click_pos",pos)
 
     def right_click(self, x,y):
         print("mouse.left_click", x, y)
@@ -28,6 +32,9 @@ class Mouse:
         time.sleep(0.1)
         pyautogui.click()
 
+    def left_click_pos(self, pos):
+        self.left_click(pos[0],pos[1])
+
     def right_click(self, x,y):
         pyautogui.moveTo(x,y, 0.1)
         time.sleep(0.1)
@@ -41,14 +48,17 @@ class Mouse:
 class TestMouse(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.m = Mouse()
     def test_naively(self):
-        m = Mouse()
-        m.left_click(100,100)
-        m.right_click(100,100)
-        m.left_click(200,200)
-        m.drag(300,300,510,510)
+
+        self.m.left_click(100,100)
+        self.m.right_click(100,100)
+        self.m.left_click(200,200)
+        self.m.drag(300,300,510,510)
         return
+    def test_click_pos(self):
+        #m=Mouse()
+        self.m.left_click_pos((100,100))
 
 if __name__ == '__main__':
     unittest.main()

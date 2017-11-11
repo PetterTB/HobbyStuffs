@@ -8,9 +8,102 @@ from ScreenPositions import pos_map_lr, pos_map_ul
 from ScreenPositions import pos_first_monster
 from random import randint
 
+
+class ScreenGrabStub:
+
+    def __init__(self):
+
+        self.b_box = (0,0,1365.725)
+        self.im = None
+
+        self.test_files = []
+
+    def grab_screen(self):
+        path = self.test_files.pop(0)
+        self.im = Image.open(path)
+
+    def set_map_bb(self):
+        self.b_box = pos_map_ul + pos_map_lr
+
+    def set_loot_bb(self):
+        self.b_box = pos_bb_loot_ul + pos_bb_loot_lr
+
+    def load_file_image(self,path):
+
+        self.im = Image.open(path)
+        self.im = self.im.crop(self.b_box)
+
+    def find_random_map_point(self):
+        print("Found random map point!")
+        return (100,100)
+
+    def find_similar_map_point(self,last_point):
+        print("Found random map point!")
+        return (75,75)
+
+    def is_creature_present(self):
+        return randint(0,1)
+
+
+    def is_walkable(self, c):
+
+        pixel = self.im.getpixel(c)
+        if pixel in self.walkable_pixels:
+            return True
+        return False
+
+    def get_random_coords(self):
+
+        x = randint(0, self.get_max_x()-1)
+        y = randint(0, self.get_max_y()-1)
+        return(x,y)
+
+    def simple_find_gold(self):
+
+        gold = self.find_loot_window_matches((239,140,17))
+        honeycomb = self.find_loot_window_matches((93,61,12))
+        return gold or honeycomb
+
+    def simple_find_meat(self):
+
+        return self.find_loot_window_matches((231,147,77))
+
+    def find_loot_window_matches(self, pixel_values):
+
+        x_max = self.get_max_x()
+        y_max = self.get_max_y()
+        res = []
+
+        y = 0
+        while(y< y_max):
+            for x in range(x_max):
+                if self.im.getpixel((x,y)) == pixel_values:
+                    res.append(self.make_absolute_coords((x, y)))
+                    y += 30
+            y += 1
+        return res
+
+    def make_absolute_coords(self, coords):
+        return (self.b_box[0] + coords[0]), self.b_box[1] + coords[1]
+
+    def get_max_x(self):
+        return self.b_box[2] - self.b_box[0]
+
+    def get_max_y(self):
+        return self.b_box[3] - self.b_box[1]
+
+    def is_creature_present(self):
+
+        p = self.im.getpixel(pos_first_monster)
+        for color in p:
+            if 50 <= color <= 90:
+                return False
+        return True
+
+
 class ScreenGrab:
     def __init__(self):
-        self.b_box = ()
+        self.b_box = (0,0,1365.725)
         self.im = None
         self.walkable_pixels = [(153,102,51), (0,102,0), (153,153,153)]
 
@@ -53,7 +146,6 @@ class ScreenGrab:
                         if self.is_walkable(p):
                             return self.make_absolute_coords(p)
         return self.find_random_map_point()
-
 
 
     def is_walkable(self, c):

@@ -4,6 +4,15 @@ from ScreenPositions import pos_around_char, pos_gp_bp
 from ScreenGrab import ScreenGrab
 import time
 
+class LooterMock:
+
+    def __init__(self):
+        pass
+
+    def loot_all_squares_around_char(self):
+
+        print("Looted!")
+
 class Looter:
 
     def __init__(self, mouse):

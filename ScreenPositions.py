@@ -26,3 +26,12 @@ pos_map_ul = (1197,26)
 pos_map_lr = (1303,133)
 
 pos_first_monster = (1042,82)
+
+pos_minimap_zoom_out = (1324,82)
+pos_minimap_zoom_in = (1324,103)
+pos_minimap_floor_up = (1348,85)
+pos_minimap_floor_down = (1348,103)
+
+pos_minimap_ul = (1199,28)
+pos_minimap_lr = (1302,131)
+pos_minimap_centre_cross = (1252,81)
