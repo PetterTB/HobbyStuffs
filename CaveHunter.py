@@ -30,12 +30,11 @@ class CaveHunter:
 
             time.sleep(1 + random.random())
 
-            if met_mobs_last:
-                self.l.loot_all_squares_around_char()
-                met_mobs_last = False
+            creatures_present = self.check_creatures_present()
 
-            if self.check_creatures_present():
-                met_mobs_last = True
+            if creatures_present or met_mobs_last:
+                met_mobs_last = creatures_present
+                self.l.loot_all_squares_around_char()
                 c+=1
                 pyautogui.press('space')
                 #Kill creature sleep.
@@ -53,7 +52,7 @@ class CaveHunter:
                     else:
                        coords = self.s.find_similar_map_point(coords)
                     self.m.left_click(coords[0], coords[1])
-                    walk_counter = 10
+                    walk_counter = 5
                 else:
                     walk_counter-=1
 
