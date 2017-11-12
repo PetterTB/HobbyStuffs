@@ -129,8 +129,8 @@ class CaveHunter:
 
         result_list = []
 
-        for x in x_max:
-            for y in y_max:
+        for x in range(x_max):
+            for y in range(y_max):
                 if self.s.get_pixel_from_img((x,y)) == self.up_down_pixel:
                     print("Found hole/rope candidate.")
                     is_up = self.is_up_pixel()
