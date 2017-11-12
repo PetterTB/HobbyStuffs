@@ -25,6 +25,8 @@ class CaveHunter:
         start = time.time()
         end = start + seconds
 
+        print("Time to run: ", (start-end))
+
         met_mobs_last = False
         c = 0
         self.s.grab_screen()
@@ -32,6 +34,7 @@ class CaveHunter:
         walk_counter = 0
 
         while time.time() < end:
+            print("Time left: ", time.time()-end)
 
             time.sleep(1 + random.random())
 
@@ -91,6 +94,7 @@ class CaveHunter:
 
     def go_up_with_rope(self):
 
+        print("Going up!")
         up = self.find_up()
         self.m.left_click_pos(up)
 
@@ -100,6 +104,8 @@ class CaveHunter:
             time.sleep(0.4)
 
     def go_down(self):
+
+        print("Going down!")
         down = self.find_up(return_down=True)
         self.m.left_click_pos(down)
         time.sleep(25)
@@ -150,7 +156,7 @@ class TestCaveHunter(unittest.TestCase):
         self.hunter.s.test_files = [r'C:\dev\HobbyStuffs\Archive_input\test_wasps.png']*200
 
     def test_hunt_for_time(self):
-        self.hunter.hunt_floor(0)
+        self.hunter.hunt_floor(100)
 
     def test_find_up(self):
         pass

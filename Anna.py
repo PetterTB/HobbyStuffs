@@ -18,18 +18,16 @@ def parse_args():
 
 def main():
     while(True):
-        try:
-            c = CaveHunter(GameInput())
-            c.hunt_floor(100)
-            c.go_down()
-            c.hunt_floor(100)
-            c.go_down()
-            c.hunt_floor(100)
-            c.go_up_with_rope()
-            c.hunt_floor(50)
-            c.go_up_with_rope()
-        except:
-            print("Oi, Exception!")
+
+        c = CaveHunter(GameInput())
+        c.hunt_floor(100)
+        c.go_down()
+        c.hunt_floor(100)
+        c.go_down()
+        c.hunt_floor(100)
+        c.go_up_with_rope()
+        c.hunt_floor(50)
+        c.go_up_with_rope()
 
 
 if __name__ == '__main__':
