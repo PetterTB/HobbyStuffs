@@ -47,6 +47,8 @@ def main():
     args = parse_args()
     if args.hunt == "wasp":
         hunt_wasps()
+    if args.record_to:
+        screen_grab(args.record_to)
 
 
 
