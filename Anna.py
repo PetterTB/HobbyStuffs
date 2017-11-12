@@ -9,7 +9,7 @@ import argparse
 def screen_grab(path):
 
     i = 0
-    while(True)
+    while(True):
         box = ()
         im = ImageGrab.grab(box)
         save = path + str(i) + ".png"
