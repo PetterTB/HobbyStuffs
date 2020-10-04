@@ -3,6 +3,7 @@ import time
 import random
 from bp import get_bb_items, get_bp_bbs
 from ScreenShot import get_screen_shot
+from mapper import MiniMap
 
 centre_x = 740
 centre_y = 320
@@ -13,12 +14,14 @@ def heal():
     pyautogui.press("2")
 
 def next():
+    pyautogui.keyDown("ctrl")
     pyautogui.press("space")
+    pyautogui.keyUp("ctrl")
 
 def left_click(x, y):
     pyautogui.moveTo(x, y, 0.1)
     time.sleep(0.1)
-    autogui.click()
+    pyautogui.click()
 
 def check_loot():
 
@@ -49,15 +52,18 @@ def loot():
 
     check_loot()
 
-tick = 8
+tick = 4
 while(tick):
     tick += 1
     time.sleep(random.random() + 0.5)
 
-    if (tick % 10 == 0):
-        loot()
+    if (tick % 5 == 0):
         next()
 
     if (tick % 15 == 0):
+        loot()
         heal()
+        pos = MiniMap().get_minimap_move_pos(get_screen_shot())
+        print("Moving to! : ", pos)
+        left_click(pos[0], pos[1])
 
