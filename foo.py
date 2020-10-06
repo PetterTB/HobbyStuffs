@@ -1,12 +1,20 @@
-from PIL import ImageGrab
-from PIL import Image
+# import the opencv library 
+from PIL import ImageTk
+import tkinter as tk
+from ImageProvider import ImageProvider
 
+from ImageProvider import ImageProvider
 
-box = ()
-im = ImageGrab.grab(box)
-save ="foo.png"
-im.save(save, 'PNG')
+im = ImageProvider()
+gui = tk.Tk()
 
-from mapper import FullMap
+c1 = tk.Canvas(gui, width=1000, height=500)
+c1.pack(expand=True)
 
-print(FullMap().find_position(im))
+im.get_pil_image().show()
+
+bmpimg = ImageTk.PhotoImage(im.get_pil_image())
+
+c1.create_image(0, 0, image=bmpimg, anchor=tk.NW)
+
+gui.mainloop()
