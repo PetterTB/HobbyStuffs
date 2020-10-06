@@ -1,21 +1,20 @@
-from PIL import ImageGrab
 from PIL import Image
 
 import unittest
-import random
-
 import math
-
 # Used for position finding.
 import cv2 as cv
-import numpy as np
-
-# from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt for disabled debug printing.
 
 MINIMAP_CENTRE = (1778, 103)
 
 
-class MapPoint():
+class MapPoint:
+    """ Represents a point on the tibia map.
+
+        position p is given in pixel coords of the tibian map files.
+    """
+
     def __init__(self, point, floor=0):
         self.p = point
         self.x = point[0]
@@ -26,11 +25,15 @@ class MapPoint():
         return self.p == other.p and self.floor == other.floor
 
     def __hash__(self):
-        return self.floor*1000+self.y*100+ self.x
+        return self.floor * 1000 + self.y * 100 + self.x
 
 
-class FullMap():
-    """ All points on map are assumed to be of type "MapPoint".
+class FullMap:
+    """ Class handling the use of the known minimaps of the game.
+
+    Levels go from -8 to +7.
+
+    All points on map are assumed to be of type "MapPoint".
     """
 
     def __init__(self):
@@ -55,7 +58,12 @@ class FullMap():
             self.path_maps[floor] = Image.open(f"maps/floor-{path_str}-path.png").convert("RGB")
 
     def find_path(self, start, dest):
-        """Params are given in map pixel coords.
+        """Find path from start to dest. Returns list of MapPoints, or None.
+                Only supports same level paths.
+                todo: fix level changes.
+                todo: cleanup code (extract into separate class?)
+
+        start and dest assumed to be MapPoints.
         """
 
         open_set = [start]
@@ -63,21 +71,17 @@ class FullMap():
         costs = {start: 0}
         came_from = {}
 
-        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0),
-                     (1, 1), (-1, -1), (1, -1), (-1, 1)]
-
         while open_set:
             open_set.sort(key=lambda x: costs[x])
             node = open_set.pop(0)
 
+            # Found the path!
             if node == dest:
-                print("Found res!")
                 path = []
                 path_node = dest
                 while path_node in came_from.keys():
                     path.append(path_node)
                     path_node = came_from[path_node]
-                #self.print_pixels(path)
                 return path
 
             for next_node, step_cost in self.get_neighbors_and_cost(node):
@@ -88,6 +92,7 @@ class FullMap():
                             open_set.append(next_node)
                         came_from[next_node] = node
                         costs[next_node] = cost
+        return None
 
     def get_neighbors_and_cost(self, point):
         """ point is assumed to be a MapPoint.
@@ -99,12 +104,12 @@ class FullMap():
                      (1, 1), (-1, -1), (1, -1), (-1, 1)]
 
         for n in neighbors:
-            stepCost = 4
+            step_cost = 4
             if n in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-                stepCost = 1
+                step_cost = 1
 
             p = MapPoint(((point.x + n[0]), (point.y + n[1])), point.floor)
-            res.append((p, stepCost))
+            res.append((p, step_cost))
         return res
 
     def get_cost(self, costs, node):
@@ -116,23 +121,6 @@ class FullMap():
         x = p2[0] - p1[0]
         y = p2[1] - p1[1]
         return math.sqrt(x * x + y * y)
-
-    def print_pixels(self, pixels):
-
-        x_vals = [x[0] for x in pixels]
-        y_vals = [x[1] for x in pixels]
-
-        bbox = (min(x_vals) - 1, min(y_vals) - 1, max(x_vals) + 1, max(y_vals) + 1)
-        im = self.map_img.copy()
-
-        for p in pixels:
-            im.putpixel(p, (255, 0, 0))
-
-        im = im.crop(bbox)
-
-        im.show()
-
-        im.save("mapper_foo.png")
 
     def get_walkable(self, node):
 
@@ -147,23 +135,21 @@ class FullMap():
             return True
 
     def find_position(self, image):
-        """ Uses minimap to find char position.
-                This assumes that the minimap is at the second largest magnification.
+        """ Uses minimap image to find char position.
+                Minimap is assumed to be at second largest magnification.
+                returns position of centre of minimap (character).
         """
         mmap = image.crop((MINIMAP_CENTRE[0] - 50, MINIMAP_CENTRE[1] - 50,
                            MINIMAP_CENTRE[0] + 50, MINIMAP_CENTRE[1] + 50))
 
+        # todo: make this relative. Use less of the minimap?
         mmap = mmap.resize((80, 80), Image.ANTIALIAS)
 
         pos_minimap = self.find_position_from_minimap(mmap)
 
-        return (pos_minimap[0] + 40, pos_minimap[1] + 40)
+        return pos_minimap[0] + 40, pos_minimap[1] + 40
 
     def find_position_from_minimap(self, minimap):
-        """ Character is assumed to be positioned in the centre of the minimap.
-                Answer given in pixel coords in the tibia maps.
-        """
-
         minimap.save("tmp.png", "png")
 
         img = cv.imread(self.map, 1)
@@ -171,13 +157,12 @@ class FullMap():
 
         h, w, channels = template.shape[:]
 
-        # Choice of method TM_CCOEFF is fairly arbitrary.
-        res = cv.matchTemplate(img, template, eval("cv.TM_CCOEFF"))
+        res = cv.matchTemplate(img, template, eval("cv.TM_CCOEFF"))  # TM_CCOEFF chosen by simple testing.
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
         top_left = max_loc
         bottom_right = (top_left[0] + w, top_left[1] + h)
 
-        """
+        """ Old debugging outputs.
         i = Image.open(self.map)
         i = i.crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
         i.show()
@@ -193,34 +178,10 @@ class FullMap():
         return top_left
 
 
-class MiniMap():
-    DIRECTION = (random.randint(-1, 1), random.randint(-1, 1))
-
-    def get_minimap_move_pos(self, image):
-        centre = MINIMAP_CENTRE
-
-        if random.randint(1, 10) == 3:
-            self.DIRECTION = (random.randint(-1, 1), random.randint(-1, 1))
-
-        pos = (centre[0] + self.DIRECTION[0] * 5), (centre[1] + self.DIRECTION[1] * 5)
-        if image.getpixel(pos) == (153, 102, 51):
-            return pos
-
-        for dist in range(10):
-            for tries in range(dist):
-                x = pos[0] + random.randint(0, dist)
-                y = pos[1] + random.randint(0, dist)
-                if image.getpixel((x, y)) == (153, 102, 51):
-                    return (x, y)
-
-        self.DIRECTION = (random.randint(-1, 1), random.randint(-1, 1))
-        return centre
-
-
 class MapTest(unittest.TestCase):
 
     def test_simple_find_pos(self):
-        pos = FullMap().find_position_from_minimap(Image.open("test_map1.png"))
+        pos = FullMap().find_position_from_minimap(Image.open("mapper_test1.png"))
         self.assertEqual(pos, (868, 647))
 
     def test_find_path(self):
