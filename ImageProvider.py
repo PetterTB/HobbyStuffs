@@ -1,5 +1,6 @@
 import cv2
 from PIL import Image
+from positions import Positions
 
 
 class ImageProvider:
@@ -20,4 +21,9 @@ class ImageProvider:
 
     def get_pil_image(self):
         r, frame = self.vid.read()
-        return Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        ul = Positions.get("cam_tibia_window_ul")
+        lr = Positions.get("cam_tibia_window_lr")
+
+        return Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)).crop(ul + lr)
+
+

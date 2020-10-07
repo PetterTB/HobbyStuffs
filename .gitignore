@@ -3,3 +3,8 @@ Archive_input/*
 .idea/workspace.xml
 __pycache__/*
 venv/*
+
+tmp.png
+tmp_found.png
+foo.png
+window.bmp

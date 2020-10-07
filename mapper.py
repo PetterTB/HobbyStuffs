@@ -26,6 +26,9 @@ class MapPoint:
     def __hash__(self):
         return self.floor * 1000 + self.y * 100 + self.x
 
+    def __str__(self):
+        return "MapPoint at: " + str(self.p) + " floor: " + self.floor
+
 
 class FullMap:
     """ Class handling the use of the known minimaps of the game.
@@ -128,43 +131,52 @@ class FullMap:
         else:
             return True
 
+
+class Minimap:
+    """ Class handling the use of the known minimaps of the game.
+
+    Levels go from -8 to +7.
+
+    All points on map are assumed to be of type "MapPoint".
+    """
+
+    def __init__(self):
+        self.fullmap = FullMap()
+        self.pos = MapPoint((0,0),0)
+
+        self.latest_minimap = None
+        self.latest_result_map = None
+
+    def update(self, cropped_minimap_img):
+
+        self.latest_minimap = cropped_minimap_img
+        self.pos = self.find_position(cropped_minimap_img)
+
     def find_position(self, cropped_minimap_img):
         """ Uses minimap image to find char position.
                 Minimap is assumed to be at second largest magnification.
                 returns position of centre of minimap (character).
         """
-        # todo: make this relative. Use less of the minimap?
         mmap = cropped_minimap_img.resize((80, 80), Image.ANTIALIAS)
-
         pos_minimap = self.find_position_from_minimap(mmap)
 
         return pos_minimap[0] + 40, pos_minimap[1] + 40
 
     def find_position_from_minimap(self, minimap):
-        minimap.save("tmp.png", "png")
-
-        template = cv.imread('tmp.png', 1)
+        template = numpy.array(minimap)
+        template = template[:, :, ::-1].copy()
 
         h, w, channels = template.shape[:]
 
-        open_cv_image = numpy.array(self.maps[0]) # Save these in class for a speedup.
+        open_cv_image = numpy.array(self.fullmap.maps[0]) # Save these in class for a speedup.
         open_cv_image = open_cv_image[:, :, ::-1].copy()
 
         res = cv.matchTemplate(open_cv_image, template, eval("cv.TM_CCOEFF"))  # TM_CCOEFF chosen by simple testing.
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
         top_left = max_loc
 
-        i = self.maps[0].crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
-        i.save("tmp.found.png", "png")
-        """
-
-        cv.rectangle(img, top_left, bottom_right, 255, 2)
-        plt.subplot(121), plt.imshow(res)
-        plt.title('Matching Result'), plt.xticks([]), plt.yticks([])
-        plt.subplot(122), plt.imshow(img)
-        plt.title('Detected Point'), plt.xticks([]), plt.yticks([])
-        plt.show()
-        """
+        i = self.fullmap.maps[0].crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
+        self.latest_result_map = i
 
         return top_left
 
@@ -172,7 +184,7 @@ class FullMap:
 class MapTest(unittest.TestCase):
 
     def test_simple_find_pos(self):
-        pos = FullMap().find_position_from_minimap(Image.open("mapper_test1.png"))
+        pos = Minimap().find_position_from_minimap(Image.open("mapper_test1.png"))
         self.assertEqual(pos, (868, 647))
 
     def test_find_path(self):
