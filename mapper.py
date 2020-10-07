@@ -6,8 +6,7 @@ import math
 import cv2 as cv
 # from matplotlib import pyplot as plt for disabled debug printing.
 
-MINIMAP_CENTRE = (1778, 103)
-
+import numpy
 
 class MapPoint:
     """ Represents a point on the tibia map.
@@ -37,18 +36,13 @@ class FullMap:
     """
 
     def __init__(self):
-        self.map = "maps/floor-07-map.png"
-        self.map_path = "maps/floor-07-path.png"
-
-        self.map_img = Image.open(self.map)
-        self.map_img = self.map_img.convert("RGB")
-        self.map_path_img = Image.open(self.map_path)
-        self.map_path_img = self.map_path_img.convert("RGB")
-
         # from level -8 to level 7
         self.maps = {}
         self.path_maps = {}
 
+        self._init_maps_from_file()
+
+    def _init_maps_from_file(self):
         for x in range(0, 15):
             floor = -x + 7
             path_str = str(x)
@@ -124,7 +118,7 @@ class FullMap:
 
     def get_walkable(self, node):
 
-        pixel = self.map_path_img.getpixel(node)
+        pixel = self.path_maps[0].getpixel(node)
 
         yellow = (255, 255, 0)
         white = (250, 250, 250)
@@ -134,16 +128,13 @@ class FullMap:
         else:
             return True
 
-    def find_position(self, image):
+    def find_position(self, cropped_minimap_img):
         """ Uses minimap image to find char position.
                 Minimap is assumed to be at second largest magnification.
                 returns position of centre of minimap (character).
         """
-        mmap = image.crop((MINIMAP_CENTRE[0] - 50, MINIMAP_CENTRE[1] - 50,
-                           MINIMAP_CENTRE[0] + 50, MINIMAP_CENTRE[1] + 50))
-
         # todo: make this relative. Use less of the minimap?
-        mmap = mmap.resize((80, 80), Image.ANTIALIAS)
+        mmap = cropped_minimap_img.resize((80, 80), Image.ANTIALIAS)
 
         pos_minimap = self.find_position_from_minimap(mmap)
 
@@ -152,20 +143,20 @@ class FullMap:
     def find_position_from_minimap(self, minimap):
         minimap.save("tmp.png", "png")
 
-        img = cv.imread(self.map, 1)
         template = cv.imread('tmp.png', 1)
 
         h, w, channels = template.shape[:]
 
-        res = cv.matchTemplate(img, template, eval("cv.TM_CCOEFF"))  # TM_CCOEFF chosen by simple testing.
+        open_cv_image = numpy.array(self.maps[0]) # Save these in class for a speedup.
+        open_cv_image = open_cv_image[:, :, ::-1].copy()
+
+        res = cv.matchTemplate(open_cv_image, template, eval("cv.TM_CCOEFF"))  # TM_CCOEFF chosen by simple testing.
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
         top_left = max_loc
-        bottom_right = (top_left[0] + w, top_left[1] + h)
 
-        """ Old debugging outputs.
-        i = Image.open(self.map)
-        i = i.crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
-        i.show()
+        i = self.maps[0].crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
+        i.save("tmp.found.png", "png")
+        """
 
         cv.rectangle(img, top_left, bottom_right, 255, 2)
         plt.subplot(121), plt.imshow(res)
