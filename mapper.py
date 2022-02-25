@@ -4,7 +4,7 @@ import unittest
 import math
 # Used for position finding.
 import cv2 as cv
-# from matplotlib import pyplot as plt for disabled debug printing.
+from matplotlib import pyplot as plt
 
 import numpy
 
@@ -139,6 +139,12 @@ class Minimap:
 
     All points on map are assumed to be of type "MapPoint".
     """
+    automap_colors = {"lgreen":(0,204,0), "dgreen":(0,102,0), "brown" : (153,102,51),
+                      "red":(255,51,0), "y":(255,255,0), "o" : (255,102,0),
+                      "blue" : (51,102,153), "black" : (0,0,0),
+                      "grey":(153,153,153), "dgrey": (102,102,102),
+                      "sand":(255,204,153), "lime" : (153,255,102),
+                      "white" : (255,255,255), "ice" : (204,255,255)}
 
     def __init__(self):
         self.fullmap = FullMap()
@@ -149,7 +155,7 @@ class Minimap:
 
     def update(self, cropped_minimap_img):
 
-        self.latest_minimap = cropped_minimap_img
+        cropped_minimap_img.save("cropped_minimap_img.bmp")
         self.pos = self.find_position(cropped_minimap_img)
 
     def find_position(self, cropped_minimap_img):
@@ -157,8 +163,11 @@ class Minimap:
                 Minimap is assumed to be at second largest magnification.
                 returns position of centre of minimap (character).
         """
-        mmap = cropped_minimap_img.resize((80, 80), Image.ANTIALIAS)
+        mmap = cropped_minimap_img.resize((120, 120), Image.ANTIALIAS)
         pos_minimap = self.find_position_from_minimap(mmap)
+
+        self.latest_minimap = mmap
+        mmap.save("mmap.bmp")
 
         return pos_minimap[0] + 40, pos_minimap[1] + 40
 
@@ -171,23 +180,62 @@ class Minimap:
         open_cv_image = numpy.array(self.fullmap.maps[0]) # Save these in class for a speedup.
         open_cv_image = open_cv_image[:, :, ::-1].copy()
 
-        res = cv.matchTemplate(open_cv_image, template, eval("cv.TM_CCOEFF"))  # TM_CCOEFF chosen by simple testing.
+        res = cv.matchTemplate(open_cv_image, template, eval("cv.TM_CCOEFF "))  # TM_CCOEFF chosen by simple testing.
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
         top_left = max_loc
 
-        i = self.fullmap.maps[0].crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
-        self.latest_result_map = i
+        self.latest_result_map = self.fullmap.maps[0].crop((top_left[0], top_left[1], top_left[0] + w, top_left[1] + h))
 
+        img_with_rectangle = cv.rectangle(open_cv_image,
+                                          top_left, (top_left[0] + w, top_left[1] + h), 255, 2)
+        """ Shows result of template match.
+        plt.subplot(121), plt.imshow(res)
+        plt.title('Matching Result'), plt.xticks([]), plt.yticks([])
+        plt.subplot(122), plt.imshow(img_with_rectangle)
+        plt.title('Detected Point'), plt.xticks([]), plt.yticks([])
+        plt.show()
+        """
         return top_left
+
+    def sharpen_to_closest(self, minimap):
+        automap_colors = {"lgreen": (0, 204, 0), "dgreen": (0, 102, 0), "brown": (153, 102, 51),
+                          "red": (255, 51, 0), "y": (255, 255, 0), "o": (255, 102, 0),
+                          "blue": (51, 102, 153), "black": (0, 0, 0),
+                          "grey": (153, 153, 153), "dgrey": (102, 102, 102),
+                          "sand": (255, 204, 153), "lime": (153, 255, 102),
+                          "white": (255, 255, 255), "ice": (204, 255, 255)}
+
+        pixels = minimap.load()
+
+        for i in range(minimap.size[0]):
+            for j in range(minimap.size[1]):
+                best = 10000
+                best_key = "ice"
+                for key in Minimap.automap_colors.keys():
+                    s = sum((x-y)**2 for x,y in zip(Minimap.automap_colors[key],pixels[i,j]))
+                    if s<best:
+                        s=best
+                        best_key = key
+                pixels[i,j] = Minimap.automap_colors[best_key]
+
+        return minimap
 
 
 class MapTest(unittest.TestCase):
+
+    def test_minimap_sharpener(self):
+        map = Minimap().sharpen_to_closest(Image.open("testdata/mapper_test2.bmp"))
+        map.show()
 
     def test_simple_find_pos(self):
         pos = Minimap().find_position_from_minimap(Image.open("mapper_test1.png"))
         self.assertEqual(pos, (868, 647))
 
-    def test_find_path(self):
+    def test_find_pos_Thais(self):
+        pos = Minimap().find_position_from_minimap(Image.open("testdata/mapper_test2.bmp"))
+        print(pos)
+
+    def _test_find_path(self):
         # import cProfile
         # import re
         f = FullMap()
@@ -206,3 +254,4 @@ class MapTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

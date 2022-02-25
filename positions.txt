@@ -1,3 +1,4 @@
 {'ex': (1, 0), 
 "cam_tibia_window_ul": (52, 4), "cam_tibia_window_lr": (619,475),
-"cam_minimap_ul": (450, 24), "cam_minimap_lr": (521,103)}
+"cam_minimap_ul": (449, 26), "cam_minimap_lr": (525,105),
+"screen_tibia_window_ul": (0,0), "screen_tibia_window_lr": (1269, 1020)}

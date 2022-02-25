@@ -1,0 +1,9 @@
+Ongoing notes on development. Ideas for the future. Shit I am too lazy to do. Stuff like that.
+
+On maps and mapper: just found that maps from screen (second largest magn) is roughly 65% of maps on file.
+This is less than last time.
+Automate this somehow?
+
+On finding coords. What about a flashing light system? Could have coords on Tibia client, flash up a border of those,
+    find that border in the webcam, and bobs your uncle! Can even calibrate the aberrations..
+
